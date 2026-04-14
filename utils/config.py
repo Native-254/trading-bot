@@ -16,6 +16,7 @@ def load_config(config_path='config/settings.yaml'):
     config['exchanges']['nyse']['account_id'] = os.getenv('IB_ACCOUNT_ID', config['exchanges']['nyse']['account_id'])
     config['monitoring']['telegram']['bot_token'] = os.getenv('TELEGRAM_BOT_TOKEN')
     config['monitoring']['telegram']['chat_id'] = os.getenv('TELEGRAM_CHAT_ID')
+    config['monitoring']['discord']['webhook_url'] = os.getenv('DISCORD_WEBHOOK_URL', '')
     return config
 
 # Singleton instance for easy import
