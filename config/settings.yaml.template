@@ -1,0 +1,65 @@
+# config/settings.yaml
+general:
+  bot_name: "Mkopo" # Your bot's name. Swahili for 'Loan' or 'Credit'
+  log_level: "INFO" # DEBUG, INFO, WARNING, ERROR
+  timezone: "Africa/Nairobi" # Important for scheduling
+
+exchanges:
+  nyse:
+    broker: "ib" # Interactive Brokers
+    port: 7497 # TWS paper trading port
+    client_id: 1
+    account_id: "YOUR_IB_PAPER_ACCOUNT" # e.g., "DU123456"
+  nse:
+    broker: "ib" # Using IB for global access, but you'd use a local broker's API
+    # This is a placeholder. For NSE, you'd integrate with a local broker's API.
+    # We'll simulate NSE data for now.
+
+data:
+  sources:
+    - name: "yfinance"
+      enabled: true
+    - name: "ib"
+      enabled: true
+  update_frequency:
+    historical: "1d" # For daily data
+    intraday: "5m" # For 5-minute bars
+
+risk_management:
+  max_capital_per_trade: 0.02 # 2% of total capital per trade
+  max_portfolio_heat: 0.15 # 15% total risk across all open positions
+  daily_loss_limit: 0.05 # Stop trading if down 5% on the day
+  max_drawdown: 0.20 # Reduce size by 50% if drawdown exceeds 20%
+  volatility_stop_multiplier: 2.0 # Use 2x ATR for stop-loss
+
+strategies:
+  active:
+    - name: "MagicFormula"
+      type: "fundamental"
+      enabled: true
+    - name: "TrendFollowing"
+      type: "technical"
+      enabled: true
+  parameters:
+    magic_formula:
+      rebalance_frequency: "monthly"
+      min_market_cap: 1000000000 # $1B
+    trend_following:
+      fast_ma: 50
+      slow_ma: 200
+      rsi_period: 14
+      rsi_oversold: 30
+      rsi_overbought: 70
+
+execution:
+  paper_trading: true
+  order_timeout: 60 # seconds
+  slippage_model: "fixed" # or 'adaptive'
+  fixed_slippage_bps: 5 # 0.05% slippage
+
+monitoring:
+  telegram:
+    enabled: false
+    bot_token: "YOUR_TELEGRAM_BOT_TOKEN"
+    chat_id: "YOUR_CHAT_ID"
+  health_check_port: 8000 # For FastAPI health endpoint
