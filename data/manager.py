@@ -4,6 +4,7 @@ from pathlib import Path
 from utils.config import CONFIG
 from utils.logger import log
 from data.yahoo_provider import YahooFinanceProvider
+import time
 # from data.ib_provider import IBProvider # We'll add this later
 
 class DataManager:
@@ -32,6 +33,9 @@ class DataManager:
                 df = provider.get_historical_data(symbol, start_date, end_date, interval)
                 if not df.empty:
                     log.success(f"Successfully fetched {symbol} data from {name}")
+                    # Polite delay to avoid Yahoo rate limits (HTTP 429)
+                    if name == 'yahoo':
+                        time.sleep(0.5)   # ← Add this
                     break  # Stop after first successful fetch
             except Exception as e:
                 log.warning(f"Provider {name} failed for {symbol}: {e}")

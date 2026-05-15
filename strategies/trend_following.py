@@ -4,6 +4,8 @@ import numpy as np
 import ta
 from strategies.base import BaseStrategy
 from utils.logger import log
+import ta.trend
+import ta.momentum
 
 class TrendFollowing(BaseStrategy):
     """

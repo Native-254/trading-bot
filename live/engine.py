@@ -12,6 +12,7 @@ from strategies.trend_following import TrendFollowing
 from risk.manager import RiskManager
 from execution.ib_broker import IBBroker
 from monitoring.telegram_alerter import TelegramAlerter
+from monitoring.discord_alerter import DiscordAlerter
 
 class TradingEngine:
     def __init__(self):
@@ -33,7 +34,7 @@ class TradingEngine:
                     self.strategies.append(TrendFollowing(params))
                 # Add other strategies here
 
-        self.symbols_to_trade = ['AAPL', 'MSFT', 'GOOGL'] # Your watchlist
+        self.symbols_to_trade = ['AAPL', 'MSFT', 'GOOGL', 'TSLA', 'NVDA', 'AMZN', 'META', 'JPM', 'V', 'MA', 'PG', 'DIS', 'HD', 'BAC', 'VZ', 'ADBE', 'CMCSA', 'NFLX', 'INTC', 'CSCO', 'PFE', 'MRK', 'KO', 'PEP', 'WMT', 'CVX', 'XOM', 'T', 'UNH', 'COST', 'ORCL', 'ABT', 'CRM', 'NKE', 'MCD', 'IBM', 'LLY', 'MDT', 'BMY', 'AMGN', 'SBUX', 'QCOM', 'TXN', 'GILD', 'FISV', 'INTU', 'GE', 'BA', 'CAT', 'MMM', 'AXP', 'SPGI', 'DE', 'DUK', 'SO', 'NEE', 'EXC', 'AEP', 'ED', 'D', 'EIX', 'PEG', 'SRE', 'WEC', 'ES', 'CMS'] # Your watchlist
         self.is_running = False
         log.success("Trading Engine initialized.")
 
@@ -142,7 +143,7 @@ class TradingEngine:
 
         # Schedule the main loop to run daily at a specific time (e.g., after market close)
         # For intraday, you'd schedule it more frequently.
-        schedule.every().day.at("16:30").do(self.run_iteration) # 4:30 PM EST, after NYSE close
+        schedule.every(1).hours.do(self.run_iteration) # 4:30 PM EST, after NYSE close
 
         # Schedule a daily reset for the risk manager's P&L
         schedule.every().day.at("00:01").do(self.risk_manager.reset_daily_pnl)
