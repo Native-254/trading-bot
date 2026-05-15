@@ -152,3 +152,27 @@ MIT – use, modify, and distribute freely.
 
 ⚠️ Disclaimer
 This bot is for educational purposes. Use at your own risk. Past performance does not guarantee future results. Always test thoroughly in paper trading before committing real capital.
+
+
+---
+
+## 📚 Wiki Structure (GitHub Wiki)
+
+GitHub Wikis are separate from the code. After creating the wiki tab on your repo, you can add pages. Here’s a recommended structure and the content for a **Home** page and a **Deployment** page.
+
+### Wiki Home Page
+
+```markdown
+# Welcome to the Mkopo Trading Bot Wiki
+
+This wiki provides detailed guides for setup, configuration, strategy development, and deployment.
+
+## Table of Contents
+
+- [[Home]] (this page)
+- [[Quick Start Guide]]
+- [[Configuration Reference]]
+- [[Strategy Development]]
+- [[Risk Management Explained]]
+- [[24/7 Deployment with systemd]]
+- [[Troubleshooting & FAQ]]
