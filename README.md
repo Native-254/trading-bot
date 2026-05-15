@@ -52,6 +52,7 @@ python -m venv venv
 source venv/bin/activate   # Windows: venv\Scripts\activate
 pip install -r requirements.txt
 Configuration
+
 Copy the settings template and edit it:
 
 bash
@@ -75,7 +76,7 @@ Watch the terminal logs and your Discord/Telegram for trade alerts.
 
 Note: By default, the bot runs the main iteration every hour. To change the schedule, edit live/engine.py (look for schedule.every).
 
-📊 Strategies
+## 📊 Strategies
 TrendFollowing (default)
 Uses moving averages (fast/slow) and RSI to generate signals:
 
@@ -92,7 +93,7 @@ Implement generate_signals(data).
 
 Register it in live/engine.py.
 
-🛡️ Risk Management
+## 🛡️ Risk Management
 The bot enforces strict risk rules before every trade:
 
 Max capital per trade: 2% of equity (configurable)
@@ -107,7 +108,7 @@ ATR‑based stops: dynamic stop‑losses using Average True Range
 
 All values can be adjusted in config/settings.yaml.
 
-🔔 Notifications
+## 🔔 Notifications
 Discord
 Rich embeds with trade details (symbol, action, quantity, price) and error alerts. Set up via webhook URL in .env.
 
@@ -116,7 +117,7 @@ Plain text alerts. Requires a bot token and chat ID (obtain via @BotFather).
 
 Both can be enabled/disabled independently in the config.
 
-🧪 Backtesting
+## 🧪 Backtesting
 To evaluate a strategy before live use:
 
 python
@@ -132,7 +133,7 @@ results = engine.run_backtest(
 print(results)
 Uses vectorbt for fast, vectorized simulation.
 
-☁️ 24/7 Deployment (VPS)
+## ☁️ 24/7 Deployment (VPS)
 The bot can run unattended on a free‑tier Oracle Cloud, Google Cloud, or AWS instance.
 
 Recommended: Oracle Cloud Always Free (4 ARM cores, 24 GB RAM).
@@ -147,7 +148,7 @@ Run as a systemd service for auto‑start and crash recovery.
 
 A sample service file is provided in the Wiki.
 
-📜 License
+## 📜 License
 MIT – use, modify, and distribute freely.
 
 ⚠️ Disclaimer
@@ -155,24 +156,5 @@ This bot is for educational purposes. Use at your own risk. Past performance doe
 
 
 ---
-
-## 📚 Wiki Structure (GitHub Wiki)
-
-GitHub Wikis are separate from the code. After creating the wiki tab on your repo, you can add pages. Here’s a recommended structure and the content for a **Home** page and a **Deployment** page.
-
-### Wiki Home Page
-
-```markdown
-# Welcome to the Mkopo Trading Bot Wiki
-
-This wiki provides detailed guides for setup, configuration, strategy development, and deployment.
-
-## Table of Contents
-
-- [[Home]] (this page)
-- [[Quick Start Guide]]
-- [[Configuration Reference]]
-- [[Strategy Development]]
-- [[Risk Management Explained]]
-- [[24/7 Deployment with systemd]]
+]
 - [[Troubleshooting & FAQ]]
