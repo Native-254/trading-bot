@@ -51,32 +51,39 @@ cd trading-bot
 python -m venv venv
 source venv/bin/activate   # Windows: venv\Scripts\activate
 pip install -r requirements.txt
-Configuration
+```
 
+Configuration
 Copy the settings template and edit it:
 
-bash
+```bash
 cp config/settings.yaml.template config/settings.yaml
 nano config/settings.yaml   # Set broker port, account, etc.
+
+```
+
 Create a .env file for secrets (never commit):
 
-bash
+```bash
 echo "IB_ACCOUNT_ID=DU123456" >> .env
 echo "DISCORD_WEBHOOK_URL=https://discord.com/api/webhooks/..." >> .env
 echo "TELEGRAM_BOT_TOKEN=..." >> .env
 echo "TELEGRAM_CHAT_ID=..." >> .env
+```
+
 Run in Paper Trading Mode
 Start IB Gateway (paper trading) with API enabled (port 4002).
 
 Launch the bot:
 
-bash
+```bash
 python live/engine.py
+```
 Watch the terminal logs and your Discord/Telegram for trade alerts.
 
 Note: By default, the bot runs the main iteration every hour. To change the schedule, edit live/engine.py (look for schedule.every).
 
-## 📊 Strategies
+📊 Strategies
 TrendFollowing (default)
 Uses moving averages (fast/slow) and RSI to generate signals:
 
@@ -93,7 +100,7 @@ Implement generate_signals(data).
 
 Register it in live/engine.py.
 
-## 🛡️ Risk Management
+🛡️ Risk Management
 The bot enforces strict risk rules before every trade:
 
 Max capital per trade: 2% of equity (configurable)
@@ -108,7 +115,7 @@ ATR‑based stops: dynamic stop‑losses using Average True Range
 
 All values can be adjusted in config/settings.yaml.
 
-## 🔔 Notifications
+🔔 Notifications
 Discord
 Rich embeds with trade details (symbol, action, quantity, price) and error alerts. Set up via webhook URL in .env.
 
@@ -117,10 +124,11 @@ Plain text alerts. Requires a bot token and chat ID (obtain via @BotFather).
 
 Both can be enabled/disabled independently in the config.
 
-## 🧪 Backtesting
+🧪 Backtesting
 To evaluate a strategy before live use:
 
 python
+
 from backtest.engine import BacktestEngine
 engine = BacktestEngine()
 results = engine.run_backtest(
@@ -131,9 +139,10 @@ results = engine.run_backtest(
     strategy_params={'fast_ma': 20, 'slow_ma': 50}
 )
 print(results)
+
 Uses vectorbt for fast, vectorized simulation.
 
-## ☁️ 24/7 Deployment (VPS)
+☁️ 24/7 Deployment (VPS)
 The bot can run unattended on a free‑tier Oracle Cloud, Google Cloud, or AWS instance.
 
 Recommended: Oracle Cloud Always Free (4 ARM cores, 24 GB RAM).
@@ -148,13 +157,8 @@ Run as a systemd service for auto‑start and crash recovery.
 
 A sample service file is provided in the Wiki.
 
-## 📜 License
+📜 License
 MIT – use, modify, and distribute freely.
 
 ⚠️ Disclaimer
 This bot is for educational purposes. Use at your own risk. Past performance does not guarantee future results. Always test thoroughly in paper trading before committing real capital.
-
-
----
-]
-- [[Troubleshooting & FAQ]]
