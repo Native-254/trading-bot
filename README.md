@@ -112,7 +112,7 @@ Daily loss limit: stop trading if -5% on the day
 Max drawdown: reduce position sizes by 50% after 20% drawdown
 
 ATR‑based stops: dynamic stop‑losses using Average True Range
-
+python test_telegram.py
 All values can be adjusted in config/settings.yaml.
 
 🔔 Notifications

@@ -13,7 +13,6 @@ from risk.manager import RiskManager
 from execution.ib_broker import IBBroker
 from monitoring.telegram_alerter import TelegramAlerter
 from monitoring.discord_alerter import DiscordAlerter
-
 class TradingEngine:
     def __init__(self):
         log.info("Initializing Trading Engine...")
@@ -21,6 +20,7 @@ class TradingEngine:
         self.data_manager = DataManager()
         self.broker = IBBroker()
         self.telegram = TelegramAlerter()
+        self.discord = DiscordAlerter()
 
         # Initialize with paper trading account value
         initial_capital = self.broker.get_account_info()['net_liquidation']
@@ -107,6 +107,7 @@ class TradingEngine:
                             trade_risk = quantity * abs(last_price - stop_loss)
                             self.risk_manager.update_portfolio(0, trade_risk) # P&L change 0 for now
                             self.telegram.send_trade_alert(symbol, latest_signal, quantity, last_price)
+                            self.discord.send_trade_alert(symbol, latest_signal, quantity, last_price)
                         else:
                             # --- LIVE TRADING ---
                             try:
@@ -126,15 +127,22 @@ class TradingEngine:
                                 else:
                                     log.error(f"Live order failed for {symbol}. Status: {order_result}")
                                     self.telegram.send_error_alert(f"Live order failed for {symbol}.")
+                                    self.discord.send_error_alert(f"Live order failed for {symbol}.")
                             except Exception as e:
                                 log.exception(f"Critical error placing live order for {symbol}: {e}")
                                 self.telegram.send_error_alert(f"Live order exception for {symbol}: {e}")
+                                self.discord.send_error_alert(f"Live order exception for {symbol}: {e}")
                             finally:
                                 self.broker.disconnect()
 
             except Exception as e:
                 log.error(f"Error processing {symbol}: {e}")
                 self.telegram.send_error_alert(f"Error processing {symbol}: {e}")
+                self.discord.send_error_alert(f"Error processing {symbol}: {e}")
+
+        # Reset simulated open risk at the end of each paper trading iteration
+        if self.config['execution']['paper_trading']:
+            self.risk_manager.open_risk = 0.0
 
     def start(self):
         """Starts the main trading loop."""
