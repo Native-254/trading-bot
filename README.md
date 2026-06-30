@@ -66,11 +66,14 @@ pip install -r requirements.txt
 ### Configuration
 
 1. **Copy the settings template** and edit it:
+
    ```bash
    cp config/settings.yaml.template config/settings.yaml
    nano config/settings.yaml   # Set broker port, account, strategies, etc.
    ```
+
 2. **Create a `.env` file** for secrets (never commit):
+
    ```bash
    echo "IB_ACCOUNT_ID=DU123456" >> .env
    echo "DISCORD_WEBHOOK_URL=https://discord.com/api/webhooks/..." >> .env
@@ -82,9 +85,11 @@ pip install -r requirements.txt
 
 1. **Start IB Gateway** (paper trading) with API enabled (port 4002).
 2. **Launch the bot**:
+
    ```bash
    python live/engine.py
    ```
+
 3. Watch the terminal logs and your Discord/Telegram for trade alerts.
 
 > **Note:** By default, the bot runs the main iteration every hour at :01 (1 minute after the hour). To change the schedule, edit `live/engine.py` (look for `schedule.every`).
