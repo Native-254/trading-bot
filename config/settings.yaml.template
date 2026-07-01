@@ -1,6 +1,6 @@
 # config/settings.yaml
 general:
-  bot_name: "Mkopo" # Your bot's name. Swahili for 'Loan' or 'Credit'
+  bot_name: "IrieTrade" # Your bot's name. Swahili for 'Loan' or 'Credit'
   log_level: "INFO" # DEBUG, INFO, WARNING, ERROR
   timezone: "Africa/Nairobi" # Important for scheduling
 

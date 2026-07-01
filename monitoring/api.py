@@ -79,7 +79,7 @@ async def dashboard():
     <!DOCTYPE html>
     <html>
     <head>
-        <title>Mkopo Bot Dashboard</title>
+        <title>IrieTrade Dashboard</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <style>
@@ -137,7 +137,7 @@ async def dashboard():
     </head>
     <body>
         <div class="container">
-            <h1>🤖 Mkopo Trading Bot Dashboard</h1>
+            <h1>🤖 IrieTrade Dashboard</h1>
             <div class="refresh">Auto-refresh every 30s</div>
             
             <div class="metrics">
