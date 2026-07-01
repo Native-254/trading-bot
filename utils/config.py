@@ -4,7 +4,7 @@ import yaml
 from dotenv import load_dotenv
 
 # Load environment variables from a .env file (for secrets)
-load_dotenv()
+load_dotenv(override=True)
 
 def load_config(config_path='config/settings.yaml'):
     """Loads the YAML configuration file."""
