@@ -1,5 +1,7 @@
 # IrieTrade
 
+![Irie Trade](assets/irie_trade.png)
+
 A fully automated, risk‑managed trading bot for the **NYSE** (via Interactive Brokers) with paper‑trading support, Discord/Telegram alerts, and a modular strategy engine. Built from scratch in Python.
 
 ![Bot Status](https://img.shields.io/badge/status-paper_trading-brightgreen)
